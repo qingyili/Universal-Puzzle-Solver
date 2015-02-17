@@ -9,6 +9,8 @@
 LinkedListQueue::LinkedListQueue()
 {
   // TODO
+    // this is for testing !
+    // Qing yi 
 }
 
 void LinkedListQueue::add(PuzzleState *elem)
