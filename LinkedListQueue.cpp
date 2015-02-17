@@ -13,7 +13,7 @@ LinkedListQueue::LinkedListQueue()
 
 void LinkedListQueue::add(PuzzleState *elem)
 {
-  // TODO
+  // TODO hello
 }
 
 PuzzleState *LinkedListQueue::remove()
