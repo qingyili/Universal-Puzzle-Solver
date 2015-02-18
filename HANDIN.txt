@@ -40,7 +40,7 @@ Do you see why this is called breadth-first search (BFS)?
 How many steps long was your solution?  How does this compare with
 your answers to #2 and #3 on your MILESTONE?
 
-TODO:
+TODO: 
 
 2.  Try to solve the blank Sudoku board using your ArrayQueue
 and LinkedListQueue classes.  What happens?
