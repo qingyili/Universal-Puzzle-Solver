@@ -54,7 +54,7 @@ void solvePuzzle(PuzzleState *start, BagOfPuzzleStates &active, PredDict &seen, 
     // run at full speed!
     cout << "Exploring State: \n";
     state->print(cout);
-    usleep(1000000);	// Pause for some microseconds, to let human read output
+    usleep(100000);	// Pause for some microseconds, to let human read output
 
     if (state->isSolution()) {
       // Found a solution!
@@ -102,7 +102,7 @@ int main ()
   startState = new WolfGoatCabbage();
 
   // This is an empty Sudoku grid:
-  //startState = new Sudoku("000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+  startState = new Sudoku("000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
   // This is a medium difficulty problem:
   //startState = new Sudoku("167000000050600047000300009641057000800060005000980716700008000490006050000000671");
