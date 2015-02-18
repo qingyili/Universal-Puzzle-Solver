@@ -54,7 +54,7 @@ void solvePuzzle(PuzzleState *start, BagOfPuzzleStates &active, PredDict &seen, 
     // run at full speed!
     cout << "Exploring State: \n";
     state->print(cout);
-    usleep(1000000);	// Pause for some microseconds, to let human read output
+    usleep(100000);	// Pause for some microseconds, to let human read output
 
     if (state->isSolution()) {
       // Found a solution!

@@ -1,5 +1,5 @@
 LinkedListQueue.o: LinkedListQueue.cpp LinkedListQueue.hpp \
- PuzzleState.hpp BagOfPuzzleStates.hpp
+  PuzzleState.hpp BagOfPuzzleStates.hpp
 
 LinkedListQueue.hpp:
 

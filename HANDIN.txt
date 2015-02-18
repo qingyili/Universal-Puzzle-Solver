@@ -1,10 +1,9 @@
-Student Name #1: TODO:
-Student ugrad login #1: TODO:
+Student Name #1: Qing Yi Li
+Student ugrad login #1: m2c9
 
-Student Name #2: TODO:
-Student ugrad login #2: TODO:
-
-Team name (for fun!): TODO:
+Student Name #2: Divya Ratnasami
+Student ugrad login #2: w1v8
+Team name (for fun!): icountwithmyheart
 
 Acknowledgment that you understand and have followed the course's
 collaboration policy

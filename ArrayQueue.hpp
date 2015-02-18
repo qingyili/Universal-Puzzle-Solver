@@ -31,6 +31,9 @@ class ArrayQueue: public BagOfPuzzleStates
   PuzzleState **array;
 
   // TODO: list additional private member variables here,
+    int head;
+    int tail;
+    int size;
 };
 
 #endif

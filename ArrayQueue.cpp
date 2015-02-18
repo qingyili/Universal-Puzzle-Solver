@@ -22,36 +22,57 @@ ArrayQueue::ArrayQueue()
   //              and do any other initialization
   //              needed (if any)
   // TODO: implement constructor
+    head = 0;
+    tail = 0;
+    size = 100;
+    array[size];
 }
-
 void ArrayQueue::add(PuzzleState *elem)
 {
   // TODO: uncomment parameter name (commented out so you don't get a warning)
   // TODO: implement add method
+    ensure_capacity(size);
+    //if empty
+    if(is_empty()){
+        array[head]= elem;
+        tail= head;
+    }else{
+        array[tail] = elem;
+        tail= (tail+1) % size;
+    }
 }
 
 PuzzleState *ArrayQueue::remove()
 {
-  return (PuzzleState *)0;
+    PuzzleState * r;
+    r = array[head];
+    head = (head +1)% size;
+    return r;
   // TODO: implement remove method
 }
 
 bool ArrayQueue::is_empty()
 {
-  return false;
+    return head == tail;
   // TODO: implement is_empty method
 }
 
 // TODO: implement ensure_capacity (but leave this to last.. just start with lots of capacity!)
 void ArrayQueue::ensure_capacity(int n)
 {
-  if (false /* TODO: if there's not already enough room */) {
+  if (!is_empty()) {
     // Make plenty of room.
     int target_capacity = 0 /* TODO: the larger of n and twice the current capacity */;
 
     // TODO: Set the current array aside and make room for the new one.
-
+      PuzzleState* temp [n];
+      temp = new PuzzleState;
+      
     // TODO: Copy each element of the old array over.
+      for(int i =0; i<size; i++){
+          temp[i]= array[i];
+      }
+      
     // Update front carefully as you go!  Can you just use front++?
 
     // TODO: Fix front and back and capacity so they correspond to the new array.
