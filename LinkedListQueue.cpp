@@ -49,7 +49,9 @@ bool LinkedListQueue::is_empty()
 
 LinkedListQueue::~LinkedListQueue()
 {
-  // TODO
+    while (head !=NULL) {
+        remove();
+    }
 }
 
 #endif

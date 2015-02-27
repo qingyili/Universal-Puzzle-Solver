@@ -34,6 +34,7 @@ class ArrayQueue: public BagOfPuzzleStates
     int head;
     int tail;
     int size;
+    int capacity;
 };
 
 #endif

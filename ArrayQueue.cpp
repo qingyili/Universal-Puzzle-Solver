@@ -24,8 +24,8 @@ ArrayQueue::ArrayQueue()
   // TODO: implement constructor
     head = 0;
     tail = 0;
-    size = 100;
-    array[size];
+    capacity = 1000;
+    array= new PuzzleState*[capacity];
 }
 void ArrayQueue::add(PuzzleState *elem)
 {
@@ -62,22 +62,24 @@ void ArrayQueue::ensure_capacity(int n)
 {
   if (!is_empty()) {
     // Make plenty of room.
-    int target_capacity = 0 /* TODO: the larger of n and twice the current capacity */;
+    int target_capacity = (n > 2*capacity+1) ? n : (2*capacity+1); /* TODO: the larger of n and twice the current capacity */;
 
     // TODO: Set the current array aside and make room for the new one.
-      PuzzleState* temp [n];
-      temp = new PuzzleState;
+      PuzzleState **oldarray =array;
+      array = new PuzzleState*[target_capacity];
       
     // TODO: Copy each element of the old array over.
       for(int i =0; i<size; i++){
-          temp[i]= array[i];
+          array[i]= oldarray[i];
       }
       
     // Update front carefully as you go!  Can you just use front++?
 
     // TODO: Fix front and back and capacity so they correspond to the new array.
+      capacity= target_capacity;
 
     // TODO: Delete the old array.
+      delete [] oldarray;
   }
 }
 
@@ -85,6 +87,7 @@ void ArrayQueue::ensure_capacity(int n)
 ArrayQueue::~ArrayQueue()
 {
   // TODO: implement the destructor
+    delete [] array;
 
   // do any cleanup like deallocating
   // any dynamically allocated memory
