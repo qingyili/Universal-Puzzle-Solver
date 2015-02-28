@@ -36,8 +36,9 @@ class HeapPriorityQueue : public BagOfPuzzleStates
     // Heap-related helper functions.
 
     // The array representation of the heap.
-      vector<PuzzleState*> mQue;
+      vector<PuzzleState*> heap;
       
   };
+
 
 #endif
