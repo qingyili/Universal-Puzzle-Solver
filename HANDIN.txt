@@ -9,18 +9,19 @@ Acknowledgment that you understand and have followed the course's
 collaboration policy
 (http://www.ugrad.cs.ubc.ca/~cs221/current/syllabus.shtml#conduct):
 
-TODO: [[Put your names here again as a signature]]
+TODO: Qing Yi Li, Divya Ratnasami. 
 
 TODO: submit using: make handin-proj1
 
 ----------------------------------------------------------------------
 
 Approximate hours on project: TODO:
-
+12 hours 
 ----------------------------------------------------------------------
 
 For teams, rough breakdown of work: TODO:
-
+Qing Yi : Liked ist Q, Array Q, compling the running on ugrad server
+Diyva: administration stuff such as downlading the file, sharing, typing up mile stone 1. Heap Priority Que 
 ----------------------------------------------------------------------
 
 Acknowledgment of assistance: TODO:

@@ -29,6 +29,6 @@ class LinkedListQueue: public BagOfPuzzleStates
   node* head;
   node* tail;
   int size;
-};
+};3
 
 #endif

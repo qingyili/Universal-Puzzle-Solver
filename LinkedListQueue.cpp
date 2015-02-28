@@ -15,17 +15,19 @@ LinkedListQueue::LinkedListQueue()
 
 void LinkedListQueue::add(PuzzleState *elem)
 {
+    node * temp = new node();
     //first element
     if(is_empty()){
-        head->data= elem;
+        temp->data= elem;
+        head=temp;
         tail =head;
         size =1;
     }else{
         //not first element
-        node * temp = new node();
         temp->data = elem;
         tail ->next = temp;
         tail = tail->next;
+        size ++;
     }
 }
 

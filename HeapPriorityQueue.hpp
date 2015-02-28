@@ -37,6 +37,8 @@ class HeapPriorityQueue : public BagOfPuzzleStates
 
     // The array representation of the heap.
       vector<PuzzleState*> heap;
+      void swapup(int ix);
+      void swapdown(int ix);
       
   };
 
