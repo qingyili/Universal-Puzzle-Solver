@@ -102,10 +102,10 @@ int main ()
   startState = new WolfGoatCabbage();
 
   // This is an empty Sudoku grid:
-  startState = new Sudoku("000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+ // startState = new Sudoku("000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
   // This is a medium difficulty problem:
-  //startState = new Sudoku("167000000050600047000300009641057000800060005000980716700008000490006050000000671");
+  startState = new Sudoku("167000000050600047000300009641057000800060005000980716700008000490006050000000671");
 
   // And this next one is a really easy Sudoku...
   //startState = new Sudoku("927430008060000097008000402000308005400060003800201000602000300790000080500089271");
@@ -133,11 +133,11 @@ int main ()
   // 221 STUDENTS:  Uncomment one of these, to select BFS, DFS, or BestFS
   // Later, you will put declarations here to use your new implementations
   // (ArrayQueue, LinkedListQueue, or HeapPriorityQueue).
-  ArrayStack activeStates;
+  //ArrayStack activeStates;
   //LinkedListStack activeStates;
   //VectorPriorityQueue activeStates;
   //ArrayQueue activeStates;
-  //LinkedListQueue activeStates;
+  LinkedListQueue activeStates;
   //HeapPriorityQueue activeStates;
 
   // Eventually, we'll replace this with a better dictionary ADT...

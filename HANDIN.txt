@@ -39,20 +39,60 @@ puzzle.  Set a large delay in the solvePuzzle function (like 1000000).
 Do you see why this is called breadth-first search (BFS)?
 How many steps long was your solution?  How does this compare with
 your answers to #2 and #3 on your MILESTONE?
+Using a binary tree as an alanogy breadth first serach will search the children of the node then move its's way down another level. 
+Heap Priority Queue
+STEP 58:
+    X                 X    X  
+XX XXXXXXXX  XXXXXX   X   XX  
+ X X    X@    X  X   XXX  X   
+ X X XXXXXXX  X      X    X  X
+ X X          X  XXXXXX  XX XX
+   X          X  X       X  X 
+   XXXXXXXXXXXX  X  XXXXXX  X 
+     X      X   XXX  X  X   X 
+X    X  X   X        X  X   X 
+X    X  X   X   X    X  X   X 
+X       X       X             
+Linked List Queue 
+STEP 58:
+    X                 X    X  
+XX XXXXXXXX  XXXXXX   X   XX  
+ X X    X@    X  X   XXX  X   
+ X X XXXXXXX  X      X    X  X
+ X X          X  XXXXXX  XX XX
+   X          X  X       X  X 
+   XXXXXXXXXXXX  X  XXXXXX  X 
+     X      X   XXX  X  X   X 
+X    X  X   X        X  X   X 
+X    X  X   X   X    X  X   X 
+X       X       X 
 
 TODO: 
 
 2.  Try to solve the blank Sudoku board using your ArrayQueue
 and LinkedListQueue classes.  What happens?
 
-TODO:
+Solving the empty states takes a very long time becausing using a bredth first method to solve soduku is not the best, a depth first search is a better approach.
+
+
 
 3.  Switch to the medium-difficulty Sudoku problem, and comment
 out the delay and the print statements in the solvePuzzle function.
 How long does it take to solve the puzzle using your ArrayQueue
 class?  Using your LinkedListQueue class?  Is the difference big?
+Array List Queue: Final state 
 
-TODO:
+Linked List Queue Final state 
+STEP 51:
+ 1 6 7 8 4 9 5 3 2
+ 9 5 3 6 2 1 8 4 7
+ 2 8 4 3 7 5 1 6 9
+ 6 4 1 2 5 7 9 8 3
+ 8 7 9 1 6 3 4 2 5
+ 3 2 5 9 8 4 7 1 6
+ 7 1 6 5 3 8 2 9 4
+ 4 9 2 7 1 6 3 5 8
+ 5 3 8 4 9 2 6 7 1
 
 4.  Edit solve.cpp to switch to the 4x4 slider puzzle.  Make sure
 to comment out the delay and print statements in the solvePuzzle function.
@@ -60,7 +100,22 @@ How long does it take to solve this problem with your HeapPriorityQueue
 versus my VectorPriorityQueue?  Why is mine faster?  Are the asymptotic
 runtimes for the heap versus the vector wrong?
 
-TODO:
+Heap priority Queue 
+STEP 225:
+	1	2	3	4
+	5	6	7	8
+	9	10	11	12
+	13	14	15	0
+
+Vector Priority Queue
+STEP 181:
+	1	2	3	4
+	5	6	7	8
+	9	10	11	12
+	13	14	15	0
+
+TODO:The vector Priority Queue is faster because... 
+The asympotompic runtimes ...
 
 ----------------------------------------------------------------------
 

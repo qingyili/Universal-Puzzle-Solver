@@ -44,7 +44,7 @@ bool HeapPriorityQueue::is_empty() {
     return (heap.size()==0);
 }
 
-void * HeapPriorityQueue::swapup(int ix){
+void HeapPriorityQueue::swapup(int ix){
     if (ix < 1) return;
     int parent = (ix - 1) / 2;
     if(heap[ix]->getBadness() < heap[parent]->getBadness()){
@@ -57,7 +57,7 @@ void * HeapPriorityQueue::swapup(int ix){
     
 }
 
-void * HeapPriorityQueue::swapdown(int ix){
+void HeapPriorityQueue::swapdown(int ix){
     int leftChild = (2 * ix) + 1;
     int rightChild = (2 * ix) + 2;
     int min = ix;

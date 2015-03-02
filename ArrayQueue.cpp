@@ -24,7 +24,7 @@ ArrayQueue::ArrayQueue()
   // TODO: implement constructor
     head = 0;
     tail = 0;
-    capacity = 1000;
+    capacity = 100000;
     array= new PuzzleState*[capacity];
 }
 void ArrayQueue::add(PuzzleState *elem)
