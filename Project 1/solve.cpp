@@ -54,7 +54,7 @@ void solvePuzzle(PuzzleState *start, BagOfPuzzleStates &active, PredDict &seen, 
     // run at full speed!
     cout << "Exploring State: \n";
     state->print(cout);
-    usleep(100000);	// Pause for some microseconds, to let human read output
+   // usleep(100000);	// Pause for some microseconds, to let human read output
 
     if (state->isSolution()) {
       // Found a solution!
@@ -102,10 +102,10 @@ int main ()
   startState = new WolfGoatCabbage();
 
   // This is an empty Sudoku grid:
-  startState = new Sudoku("000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+ // startState = new Sudoku("000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
   // This is a medium difficulty problem:
-  //startState = new Sudoku("167000000050600047000300009641057000800060005000980716700008000490006050000000671");
+ // startState = new Sudoku("167000000050600047000300009641057000800060005000980716700008000490006050000000671");
 
   // And this next one is a really easy Sudoku...
   //startState = new Sudoku("927430008060000097008000402000308005400060003800201000602000300790000080500089271");
@@ -127,16 +127,16 @@ int main ()
 
   //startState = new SliderPuzzle(3,3,"8 7 6 5 4 3 2 1 0");
   //startState = new SliderPuzzle(3,4,"11 10 9 8 7 6 5 4 3 1 2 0");
-  //startState = new SliderPuzzle(4,4,"15 14 13 12 11 10 9 8 7 6 5 4 3 1 2 0");
+  startState = new SliderPuzzle(4,4,"15 14 13 12 11 10 9 8 7 6 5 4 3 1 2 0");
 
 
   // 221 STUDENTS:  Uncomment one of these, to select BFS, DFS, or BestFS
   // Later, you will put declarations here to use your new implementations
   // (ArrayQueue, LinkedListQueue, or HeapPriorityQueue).
-  ArrayStack activeStates;
+  //ArrayStack activeStates;
   //LinkedListStack activeStates;
-  //VectorPriorityQueue activeStates;
-  //ArrayQueue activeStates;
+  VectorPriorityQueue activeStates;
+ // ArrayQueue activeStates;
   //LinkedListQueue activeStates;
   //HeapPriorityQueue activeStates;
 
