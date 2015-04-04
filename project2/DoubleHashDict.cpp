@@ -97,15 +97,14 @@ void DoubleHashDict::rehash() {
     //temp table to rehash to.
     bucket *temp = new bucket[newSize]();
     for(int i =0; i<size;i++){
-        //copy if the spot is not empty
-        if(table[i].key !=NULL){
-            ha= hash1(table[i].keyID);
-            //linear hash take cares of linea collisons.
-            if(temp[ha].key!=NULL){
-                probes_stats++;
-                ha = hash2(table[i].keyID);
+        if(table[i].key != NULL){
+            for(int j =0; j<size; j++){
+                ha = (hash1(table[i].keyID)+ j*hash2(table[i].keyID))%size;
+                if(temp[ha].key ==NULL){
+                    temp[ha]= table[i];
+                    break;
+                }
             }
-            temp[ha]= table[i];
         }
     }
     table = temp;
@@ -124,19 +123,15 @@ bool DoubleHashDict::find(PuzzleState *key, PuzzleState *&pred) {
     // Returns true iff the key is found.
     // Returns the associated value in pred
     
-    // Be sure not to keep calling getUniqId() over and over again!
-    int ha = hash1(key->getUniqId());
-    int ha2 = hash2(key->getUniqId());
-    int ix = 0; //probe stats;
-    if(table[ha].keyID.compare(key->getUniqId())==0){
-        pred=table[ha].data;
-        ix++;
-        probes_stats[ix]++;
-        return true;
-    }else if(table[ha2].keyID.compare(key->getUniqId())==0){
-        pred=table[ha2].data;
-        probes_stats[ix]++;
-        return true;
+    // Be sure not to keep calling getUniqId() over and over again
+    int ha; //probe stats
+    for (int i=0; i<size; i++) {
+        ha = (hash1(key->getUniqId())+ i*hash2(key->getUniqId()))%size;
+        if(table[ha].key == key){
+            probes_stats[i+1]++;
+            pred = table[ha].data;
+            return  true;
+        }
     }
     return false; // Stub:  Delete this line when you've implemented the function
 }
@@ -147,18 +142,17 @@ void DoubleHashDict::add(PuzzleState *key, PuzzleState *pred) {
     // TODO:  Your code goes here...
     if(number/size>0.5)
         rehash();
-    int ha = hash1(key->getUniqId());
-    int ha2 = hash2(key->getUniqId());
+    int ha;
     //key==NULL means empty spot
     
-    if(table[ha].key==NULL){
-        table[ha].key = key;
-        table[ha].data= pred;
-        table[ha].keyID = key->getUniqId();
-    }else{
-        table[ha2].key = key;
-        table[ha2].data= pred;
-        table[ha2].keyID = key->getUniqId();
+    for(int i=0; i<size; i++){
+        ha = (hash1(key->getUniqId())+ i*hash2(key->getUniqId()))%size;
+        if(table[ha].key ==NULL){
+            table[ha].key=key;
+            table[ha].keyID= key->getUniqId();
+            table[ha].data = pred;
+            return;
+        }
     }
     number++;
 }

@@ -79,13 +79,12 @@ std::cout << "*** REHASHING " << size;
         //linear hash take cares of linea collisons.
         for(int j = 0; j<size;j++){
             if(table[ha].key!=NULL){
-                ha = ha +j;
+                ha = (ha +j)%size;
             }else break;
         }
         temp[ha]= table[i];
     }
     
-    delete table;
     table = temp;
     
   // TODO:  Your code goes here...
@@ -128,6 +127,18 @@ void LinearHashDict::add(PuzzleState *key, PuzzleState *pred) {
         rehash();
     }
   // TODO:  Your code goes here...
+    int ha;
+    for(int i =0;i<size;i++){
+        ha = (hash(key->getUniqId())+i)%size;
+        if(table[i].key==NULL){
+            table[ha].key=key;
+            table[ha].keyID= key->getUniqId();
+            table[ha].data = pred;
+            return;
+
+        }
+    }
+    number++;
 }
 
 #endif 

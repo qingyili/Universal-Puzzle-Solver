@@ -148,8 +148,8 @@ int main ()
   // I've provided you an optimized version of LinkedListDict from Project 1.
  // LinkedListDict seenStates;
   // AVLDict seenStates;
- // LinearHashDict seenStates;
-  DoubleHashDict seenStates;
+  LinearHashDict seenStates;
+ // DoubleHashDict seenStates;
 
   vector<PuzzleState*> solution;
 
