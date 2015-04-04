@@ -54,8 +54,6 @@ int LinearHashDict::hash(string keyID) {
     h = (keyID[i] + 31*h) % size;
   }
 // 221 Students:  DO NOT CHANGE OR DELETE THE NEXT FEW LINES!!!
-// We will use this code when marking to be able to watch what
-// your program is doing, so if you change things, we'll mark it wrong.
 #ifdef MARKING_TRACE
 std::cout << "Hashing " << keyID << " to " << h << std::endl;
 #endif
@@ -66,21 +64,35 @@ std::cout << "Hashing " << keyID << " to " << h << std::endl;
 void LinearHashDict::rehash() {
 // 221 Students:  DO NOT CHANGE OR DELETE THE NEXT FEW LINES!!!
 // And leave this at the beginning of the rehash() function.
-// We will use this code when marking to be able to watch what
-// your program is doing, so if you change things, we'll mark it wrong.
 #ifdef MARKING_TRACE
 std::cout << "*** REHASHING " << size;
 #endif
 // End of "DO NOT CHANGE" Block
-
-
+    
+    int newSize = primes[size_index];
+    size_index++;
+    
+    //temp table to rehash to.
+    bucket *temp = new bucket[newSize]();
+    for(int i =0; i<size;i++){
+        int ha= hash(table[i].keyID);
+        //linear hash take cares of linea collisons.
+        for(int j = 0; j<size;j++){
+            if(table[ha].key!=NULL){
+                ha = ha +j;
+            }else break;
+        }
+        temp[ha]= table[i];
+    }
+    
+    delete table;
+    table = temp;
+    
   // TODO:  Your code goes here...
 
 
 // 221 Students:  DO NOT CHANGE OR DELETE THE NEXT FEW LINES!!!
 // And leave this at the end of the rehash() function.
-// We will use this code when marking to be able to watch what
-// your program is doing, so if you change things, we'll mark it wrong.
 #ifdef MARKING_TRACE
 std::cout << " to " << size << " ***\n";
 #endif
@@ -92,14 +104,29 @@ bool LinearHashDict::find(PuzzleState *key, PuzzleState *&pred) {
   // Returns the associated value in pred
 
   // Be sure not to keep calling getUniqId() over and over again!
-
-  // TODO:  Your code goes here...
-  return true; // Stub:  Delete this when you've implemented the function.
+    int ha = hash(key->getUniqId());
+    int ix =0;// numer of probes so far
+    bool rt = false;
+    for(int i=0; i<size;i++){
+        if(table[(ha+i)%size].keyID== key->getUniqId()){
+            pred =table[(ha+i)%size].data;
+            ix++;
+            rt= true;
+            break;
+        }
+    }
+    if(ix<MAX_STATS){
+        probes_stats[ix]++;
+    
+    }
+    return rt;
 }
 
 // You may assume that no duplicate PuzzleState is ever added.
 void LinearHashDict::add(PuzzleState *key, PuzzleState *pred) {
-
+    if(number/size>0.5){
+        rehash();
+    }
   // TODO:  Your code goes here...
 }
 

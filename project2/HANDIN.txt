@@ -1,16 +1,16 @@
-Student Name #1: TODO:
-Student ugrad login #1: TODO:
+Student Name #1: Qing Yi Li
+Student ugrad login #1: m2c9
 
-Student Name #2: TODO:
-Student ugrad login #2: TODO:
+Student Name #2: Divya Ratnasami
+Student ugrad login #2: w1v8
 
-Team name (for fun!): TODO:
+Team name (for fun!): I time with my heart
 
 Acknowledgment that you understand and have followed the course's
 collaboration policy
 (http://www.ugrad.cs.ubc.ca/~cs221/current/syllabus.shtml#conduct):
 
-TODO: [[Put your names here again as a signature]]
+Qing Yi Li Divya Ratnasami
 
 TODO: submit using: make handin-proj2
 
