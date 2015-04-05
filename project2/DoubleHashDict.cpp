@@ -92,14 +92,13 @@ void DoubleHashDict::rehash() {
     
     int newSize = primes[size_index];
     size_index++;
-    size = newSize;
     int ha;
     //temp table to rehash to.
     bucket *temp = new bucket[newSize]();
     for(int i =0; i<size;i++){
         if(table[i].key != NULL){
-            for(int j =0; j<size; j++){
-                ha = (hash1(table[i].keyID)+ j*hash2(table[i].keyID))%size;
+            for(int j =0; j<newSize; j++){
+                ha = (hash1(table[i].keyID)+ j*hash2(table[i].keyID))%newSize;
                 if(temp[ha].key ==NULL){
                     temp[ha]= table[i];
                     break;
@@ -107,8 +106,10 @@ void DoubleHashDict::rehash() {
             }
         }
     }
+    size = newSize;
     table = temp;
-    
+    cout << "Rehashed";
+
     
     
     // 221 Students:  DO NOT CHANGE OR DELETE THE NEXT FEW LINES!!!
@@ -124,13 +125,14 @@ bool DoubleHashDict::find(PuzzleState *key, PuzzleState *&pred) {
     // Returns the associated value in pred
     
     // Be sure not to keep calling getUniqId() over and over again
-    int ha; //probe stats
+    int ha;
+    string ID = key->getUniqId();
     for (int i=0; i<size; i++) {
-        ha = (hash1(key->getUniqId())+ i*hash2(key->getUniqId()))%size;
+        ha = (hash1(ID)+ i*hash2(ID))%size;
         if(table[ha].key == key){
             probes_stats[i+1]++;
             pred = table[ha].data;
-            return  true;
+            return true;
         }
     }
     return false; // Stub:  Delete this line when you've implemented the function

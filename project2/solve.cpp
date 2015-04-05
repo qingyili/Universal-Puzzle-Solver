@@ -147,9 +147,9 @@ int main ()
   // dictionary implementation.
   // I've provided you an optimized version of LinkedListDict from Project 1.
  // LinkedListDict seenStates;
-  // AVLDict seenStates;
+   //AVLDict seenStates;
   LinearHashDict seenStates;
- // DoubleHashDict seenStates;
+    //DoubleHashDict seenStates;
 
   vector<PuzzleState*> solution;
 

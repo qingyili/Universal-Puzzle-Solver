@@ -77,14 +77,14 @@ std::cout << "*** REHASHING " << size;
     for(int i =0; i<size;i++){
         int ha= hash(table[i].keyID);
         //linear hash take cares of linea collisons.
-        for(int j = 0; j<size;j++){
+        for(int j = 0; j<newSize;j++){
             if(table[ha].key!=NULL){
-                ha = (ha +j)%size;
+                ha = (ha +j)%newSize;
             }else break;
         }
         temp[ha]= table[i];
     }
-    
+    size = newSize;
     table = temp;
     
   // TODO:  Your code goes here...
@@ -107,7 +107,7 @@ bool LinearHashDict::find(PuzzleState *key, PuzzleState *&pred) {
     int ix =0;// numer of probes so far
     bool rt = false;
     for(int i=0; i<size;i++){
-        if(table[(ha+i)%size].keyID== key->getUniqId()){
+        if(table[(ha+i)%size].key== key){
             pred =table[(ha+i)%size].data;
             ix++;
             rt= true;
