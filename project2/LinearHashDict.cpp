@@ -74,15 +74,15 @@ std::cout << "*** REHASHING " << size;
     
     //temp table to rehash to.
     bucket *temp = new bucket[newSize]();
-    for(int i =0; i<size;i++){
-        int ha= hash(table[i].keyID);
-        //linear hash take cares of linea collisons.
+    for(int i =0;i<size;i++){
+        //linear hash take cares of linear collisons.
         for(int j = 0; j<newSize;j++){
-            if(table[ha].key!=NULL){
-                ha = (ha +j)%newSize;
-            }else break;
+            int ha= hash(table[i].keyID)+j;
+            if(table[ha%newSize].key==NULL){
+                temp[ha%newSize]= table[i];
+                break;
+            }
         }
-        temp[ha]= table[i];
     }
     size = newSize;
     table = temp;
@@ -107,38 +107,44 @@ bool LinearHashDict::find(PuzzleState *key, PuzzleState *&pred) {
     int ix =0;// numer of probes so far
     bool rt = false;
     for(int i=0; i<size;i++){
-        if(table[(ha+i)%size].key== key){
+        ix++;
+        if(table[(ha+i)%size].key == NULL){
+            return false;
+        }
+        if(table[(ha+i)%size].keyID== key->getUniqId()){
+            //ix++;
             pred =table[(ha+i)%size].data;
-            ix++;
             rt= true;
-            break;
+            if(ix<MAX_STATS){
+                probes_stats[ix]++;
+            }
+            return true;
         }
     }
-    if(ix<MAX_STATS){
-        probes_stats[ix]++;
-    
-    }
-    return rt;
+    return false;
 }
 
 // You may assume that no duplicate PuzzleState is ever added.
 void LinearHashDict::add(PuzzleState *key, PuzzleState *pred) {
-    if(number/size>0.5){
+    double n= number;
+    double s = size;
+    double loadfactor =n/s;
+    //std::cout << "load" << loadfactor<< "\n";
+    if(loadfactor>0.5)
         rehash();
-    }
+
   // TODO:  Your code goes here...
     int ha;
     for(int i =0;i<size;i++){
         ha = (hash(key->getUniqId())+i)%size;
-        if(table[i].key==NULL){
+        if(table[ha].key==NULL){
             table[ha].key=key;
             table[ha].keyID= key->getUniqId();
             table[ha].data = pred;
+            number++;
             return;
-
         }
     }
-    number++;
 }
 
 #endif 

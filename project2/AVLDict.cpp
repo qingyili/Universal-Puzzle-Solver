@@ -61,10 +61,12 @@ bool AVLDict::update_height( node * x ) {
   // Recalculates the height of x from the height of its children.
   // Returns true iff the height of x changes.
   //
+    cout << "height before: " << height(x)<< endl;
     if(x == NULL) return false;
     int m = std::max(height(x->left), height(x->right)) + 1;
     if(height(x) != m){
         x->height = m;
+        cout << "Up height after: " << height(x)<< endl;
         return true;
     }
   // :TODO: Write this function!
@@ -93,7 +95,6 @@ void AVLDict::double_rotate_left(node *&a){
     assert(a != NULL);
     rotate_right(a->right);
     rotate_left(a);
-
     
 }
 void AVLDict::rotate_right( node *& b ) {
@@ -106,7 +107,7 @@ void AVLDict::rotate_right( node *& b ) {
 cout << "Rotate Right: " << b->keyID << endl;
 #endif
 // End of "DO NOT CHANGE" Block
-
+cout << "Rotate Right: " << b->keyID << endl;
     node * temp = b->left;
     b->left = b->right;
     temp->right = b;
@@ -125,43 +126,45 @@ void AVLDict::double_rotate_right(node *&a){
 void AVLDict::balance(node *& x ) {
     int left = height(x->left);
     int right = height(x->right);
-    if(abs(left -right) >1){
-        //rotate
-        //case 1: left single
+    if(abs(left -right) >1)
         if(right>left){
             if(height(x->right)==1+height(x->right->left))
                 double_rotate_left(x);
-            //rote left double
+
             else rotate_left(x);
-        }else
-            //case 2 : right single
+        }else{
+    
             if(right<left){
                 if(height(x->left) ==1+ height(x->left->right))
                     double_rotate_right(x);
-                //rotate right double
+
                 else rotate_right(x);
             }
-        //update when done
         update_height(x);
     }
 }
 // You may assume that no duplicate PuzzleState is ever added.
-void AVLDict::add_helper(AVLDict::node *r, AVLDict::node *toAdd){
+void AVLDict::add_helper(AVLDict::node *r, PuzzleState * key, PuzzleState *pred){
     //Base case
     if(r==NULL){
-        r = toAdd;
+        r= new node();
+        r->key = key;
+        r->keyID = key->getUniqId();
+        r->data = pred;
+        cout << "added" << endl;
         return;
-    }if(toAdd->keyID<r->keyID){
-        add_helper(r->left,toAdd);
-    }else add_helper(r->right,toAdd);
+    }if(key->getUniqId()<r->keyID){
+        add_helper(r->left,key, pred);
+        cout << "went left" << endl;
+    }else{
+        
+    add_helper(r->right,key, pred);
+    }
     if(update_height(r)) balance(r);
 }
 void AVLDict::add(PuzzleState *key, PuzzleState *pred) {
-    node* temp = new node();
-    temp->key= key;
-    temp->data= pred;
-    temp->keyID = key->getUniqId();
-    add_helper(root, temp);
+    add_helper(root, key, pred);
+    if(update_height(root)) balance(root);
 }
 
 #endif 

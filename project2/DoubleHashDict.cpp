@@ -89,28 +89,19 @@ void DoubleHashDict::rehash() {
     
     
     // TODO:  Your code goes here...
-    
-    int newSize = primes[size_index];
     size_index++;
-    int ha;
+    int newSize = primes[size_index];
+    int j =0;
     //temp table to rehash to.
     bucket *temp = new bucket[newSize]();
     for(int i =0; i<size;i++){
-        if(table[i].key != NULL){
-            for(int j =0; j<newSize; j++){
-                ha = (hash1(table[i].keyID)+ j*hash2(table[i].keyID))%newSize;
-                if(temp[ha].key ==NULL){
-                    temp[ha]= table[i];
-                    break;
-                }
-            }
+        while(temp[(hash1(table[i].keyID)+ j*hash2(table[i].keyID))%newSize].key !=NULL){
+            j++;
         }
+        temp[(hash1(table[i].keyID)+ j*hash2(table[i].keyID))%newSize]= table[i];
     }
     size = newSize;
     table = temp;
-    cout << "Rehashed";
-
-    
     
     // 221 Students:  DO NOT CHANGE OR DELETE THE NEXT FEW LINES!!!
     // And leave this at the end of the rehash() function.
@@ -129,7 +120,11 @@ bool DoubleHashDict::find(PuzzleState *key, PuzzleState *&pred) {
     string ID = key->getUniqId();
     for (int i=0; i<size; i++) {
         ha = (hash1(ID)+ i*hash2(ID))%size;
-        if(table[ha].key == key){
+        if(table[ha%size].key == NULL){
+            probes_stats[i+1]++;
+            return false;
+        }
+        if(table[ha].keyID == key->getUniqId()){
             probes_stats[i+1]++;
             pred = table[ha].data;
             return true;
@@ -142,21 +137,28 @@ bool DoubleHashDict::find(PuzzleState *key, PuzzleState *&pred) {
 void DoubleHashDict::add(PuzzleState *key, PuzzleState *pred) {
     
     // TODO:  Your code goes here...
-    if(number/size>0.5)
+    double n= number;
+    double s = size;
+    double loadfactor =n/s;
+    if(loadfactor>0.5)
         rehash();
+
     int ha;
     //key==NULL means empty spot
-    
+    //std::cout << "size" << size<< "\n";
     for(int i=0; i<size; i++){
+         //std::cout << "probes" << i<< "\n";
         ha = (hash1(key->getUniqId())+ i*hash2(key->getUniqId()))%size;
         if(table[ha].key ==NULL){
             table[ha].key=key;
             table[ha].keyID= key->getUniqId();
             table[ha].data = pred;
+            number++;
+            //std::cout << "probes" << i<< "\n";
+            //std::cout << "added!" << number<< "\n";
             return;
         }
     }
-    number++;
 }
 
-#endif 
+#endif
