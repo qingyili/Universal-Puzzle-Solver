@@ -61,7 +61,6 @@ bool AVLDict::update_height( node * x ) {
   // Recalculates the height of x from the height of its children.
   // Returns true iff the height of x changes.
   //
-    cout << "height before: " << height(x)<< endl;
     if(x == NULL) return false;
     int m = std::max(height(x->left), height(x->right)) + 1;
     if(height(x) != m){
@@ -151,13 +150,16 @@ void AVLDict::add_helper(AVLDict::node *r, PuzzleState * key, PuzzleState *pred)
         r->key = key;
         r->keyID = key->getUniqId();
         r->data = pred;
+        r->height = 1;
+       // cout << "height before: " << height(r)<< endl;
+
         cout << "added" << endl;
         return;
     }if(key->getUniqId()<r->keyID){
         add_helper(r->left,key, pred);
         cout << "went left" << endl;
     }else{
-        
+         cout << "went right" << endl;
     add_helper(r->right,key, pred);
     }
     if(update_height(r)) balance(r);
@@ -165,6 +167,7 @@ void AVLDict::add_helper(AVLDict::node *r, PuzzleState * key, PuzzleState *pred)
 void AVLDict::add(PuzzleState *key, PuzzleState *pred) {
     add_helper(root, key, pred);
     if(update_height(root)) balance(root);
+     cout << "height before: " << height(root)<< endl;
 }
 
 #endif 
