@@ -144,26 +144,25 @@ void AVLDict::balance(node *& x ) {
     }
 }
 // You may assume that no duplicate PuzzleState is ever added.
-void AVLDict::add_helper(AVLDict::node *r, PuzzleState * key, PuzzleState *pred){
+void AVLDict::add_helper(AVLDict::node *&r, node*& toAdd){
     //Base case
-    if(r==NULL){
-        r= new node();
-        r->key = key;
-        r->keyID = key->getUniqId();
-        r->data = pred;
-        cout << "added" << endl;
+    if(root==NULL){
+        root = toAdd;
         return;
-    }if(key->getUniqId()<r->keyID){
-        add_helper(r->left,key, pred);
-        cout << "went left" << endl;
-    }else{
-        
-    add_helper(r->right,key, pred);
-    }
+    }if(toAdd->keyID <root->keyID){
+        add_helper(root->left,toAdd);
+    }else add_helper(root->right,toAdd);
     if(update_height(r)) balance(r);
 }
+
 void AVLDict::add(PuzzleState *key, PuzzleState *pred) {
-    add_helper(root, key, pred);
+    node* temp = new node();
+    temp->key= key;
+    temp->data= pred;
+    temp->keyID = key->getUniqId();
+    temp->height = 0;
+    add_helper(root, temp);
+    //after add update height
     if(update_height(root)) balance(root);
 }
 

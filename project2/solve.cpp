@@ -127,11 +127,11 @@ int main ()
 //X    X  X   X   X    X  X   X 
 //X       X       X             
 
-  //startState = new SliderPuzzle(3,3,"8 7 6 5 4 3 2 1 0");
+  startState = new SliderPuzzle(3,3,"8 7 6 5 4 3 2 1 0");
   //startState = new SliderPuzzle(3,4,"11 10 9 8 7 6 5 4 3 1 2 0");
   //startState = new SliderPuzzle(4,4,"15 14 13 12 11 10 9 8 7 6 5 4 3 1 2 0");
   //startState = new SliderPuzzle(5,5,"24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0");
-  startState = new SliderPuzzle(6,6,"35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 1 2 0");
+  //startState = new SliderPuzzle(6,6,"35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 1 2 0");
 
 
   // 221 STUDENTS:  For this assignment, stick with VectorPriorityQueue.
@@ -147,9 +147,9 @@ int main ()
   // dictionary implementation.
   // I've provided you an optimized version of LinkedListDict from Project 1.
   //LinkedListDict seenStates; //
-  // AVLDict seenStates;
+  AVLDict seenStates;
     //LinearHashDict seenStates;
-    DoubleHashDict seenStates;
+    //DoubleHashDict seenStates;
 
   vector<PuzzleState*> solution;
 

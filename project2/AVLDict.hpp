@@ -41,7 +41,7 @@ private:
     void double_rotate_left(node *&a);
     void rotate_right(node *&b);
     void double_rotate_right(node*&a);
-    void add_helper(AVLDict::node *r, PuzzleState * key, PuzzleState *pred);
+    void add_helper(AVLDict::node *&r,node*& toAdd);
     void balance(node*&a);
     // You may add additional helper functions and member variables...
 };
