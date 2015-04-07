@@ -54,7 +54,7 @@ void solvePuzzle(PuzzleState *start, BagOfPuzzleStates &active, PredDict &seen, 
     // the algorithm is doing.
     // 221 STUDENTS:  Comment these out when you want the program to
     // run at full speed!
-    cout << "Exploring State: \n";
+   cout << "Exploring State: \n";
     state->print(cout);
     //usleep(1000000);	// Pause for some microseconds, to let human read output
 
@@ -66,10 +66,13 @@ void solvePuzzle(PuzzleState *start, BagOfPuzzleStates &active, PredDict &seen, 
       // Follow predecessors to construct path to solution.
       temp = state;
       while (temp!=NULL) {
+          
 	solution.push_back(temp);
 	// Guaranteed to succeed, because these states must have been
 	// added to dictionary already.
         seen.find(temp,temp);
+          //cout << "temp: \n";
+         // temp->print(cout);
       }
       return;
     }
@@ -149,7 +152,7 @@ int main ()
   //LinkedListDict seenStates; //
   AVLDict seenStates;
     //LinearHashDict seenStates;
-    //DoubleHashDict seenStates;
+   // DoubleHashDict seenStates;
 
   vector<PuzzleState*> solution;
 
@@ -166,6 +169,5 @@ int main ()
   // seenStates dictionary, and each will get deleted exactly once
   // when seenStates destructor is called.
   //delete startState;
-
   return 0;
 }

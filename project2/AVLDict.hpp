@@ -42,7 +42,7 @@ private:
     void rotate_right(node *&b);
     void double_rotate_right(node*&a);
     void add_helper(AVLDict::node *&r,node*& toAdd);
-    void balance(node*&a);
+    void balance(node*&x);
     // You may add additional helper functions and member variables...
 };
 

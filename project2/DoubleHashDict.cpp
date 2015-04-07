@@ -125,7 +125,7 @@ bool DoubleHashDict::find(PuzzleState *key, PuzzleState *&pred) {
             return false;
         }
         if(table[ha].keyID == key->getUniqId()){
-            probes_stats[i+1]++;
+            probes_stats[i]++;
             pred = table[ha].data;
             return true;
         }
@@ -137,7 +137,7 @@ bool DoubleHashDict::find(PuzzleState *key, PuzzleState *&pred) {
 void DoubleHashDict::add(PuzzleState *key, PuzzleState *pred) {
     
     // TODO:  Your code goes here...
-    double n= number;
+    double n= number+1;
     double s = size;
     double loadfactor =n/s;
     if(loadfactor>0.5)

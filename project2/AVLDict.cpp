@@ -60,13 +60,10 @@ bool AVLDict::update_height( node * x ) {
   //
   // Recalculates the height of x from the height of its children.
   // Returns true iff the height of x changes.
-  //
-    cout << "height before: " << height(x)<< endl;
-    if(x == NULL) return false;
+  //    if(x == NULL) return false;
     int m = std::max(height(x->left), height(x->right)) + 1;
     if(height(x) != m){
         x->height = m;
-        cout << "Up height after: " << height(x)<< endl;
         return true;
     }
   // :TODO: Write this function!
@@ -144,25 +141,27 @@ void AVLDict::balance(node *& x ) {
     }
 }
 // You may assume that no duplicate PuzzleState is ever added.
-void AVLDict::add_helper(AVLDict::node *&r, node*& toAdd){
+void AVLDict::add_helper(AVLDict::node *& r, node *& toAdd){
     //Base case
-    if(root==NULL){
-        root = toAdd;
+    if(r == NULL){
+        r = toAdd;
         return;
-    }if(toAdd->keyID <root->keyID){
-        add_helper(root->left,toAdd);
-    }else add_helper(root->right,toAdd);
-    if(update_height(r)) balance(r);
+    }if(toAdd->keyID <r->keyID){
+        add_helper(r->left,toAdd);
+    }else if(toAdd->keyID >r->keyID)
+        add_helper(r->right,toAdd);
+    //if(update_height(r)) balance(r);
 }
 
 void AVLDict::add(PuzzleState *key, PuzzleState *pred) {
-    node* temp = new node();
+    node * temp = new node();
     temp->key= key;
     temp->data= pred;
     temp->keyID = key->getUniqId();
     temp->height = 0;
+    temp->left = NULL;
+    temp->right = NULL;
     add_helper(root, temp);
-    //after add update height
     if(update_height(root)) balance(root);
 }
 

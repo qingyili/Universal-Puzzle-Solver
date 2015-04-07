@@ -68,10 +68,9 @@ void LinearHashDict::rehash() {
 std::cout << "*** REHASHING " << size;
 #endif
 // End of "DO NOT CHANGE" Block
-    
-    int newSize = primes[size_index];
+    std::cout << "REHASHING number " << number << " , size = "<< size<< endl;
     size_index++;
-    
+    int newSize = primes[size_index];
     //temp table to rehash to.
     bucket *temp = new bucket[newSize]();
     for(int i =0;i<size;i++){
@@ -103,34 +102,32 @@ bool LinearHashDict::find(PuzzleState *key, PuzzleState *&pred) {
   // Returns the associated value in pred
 
   // Be sure not to keep calling getUniqId() over and over again!
-    int ha = hash(key->getUniqId());
     int ix =0;// numer of probes so far
-    bool rt = false;
-    for(int i=0; i<size;i++){
-        ix++;
-        if(table[(ha+i)%size].key == NULL){
-            return false;
-        }
-        if(table[(ha+i)%size].keyID== key->getUniqId()){
-            //ix++;
-            pred =table[(ha+i)%size].data;
-            rt= true;
-            if(ix<MAX_STATS){
-                probes_stats[ix]++;
-            }
-            return true;
-        }
+    
+    string keyID = key->getUniqId();
+    int hx = hash( keyID );
+    while( table[ hx ].key && ( table[ hx ].keyID != keyID ) && ( ix < size) ) {
+        ix += 1;
+        hx = (hx + 1) % size;
     }
-    return false;
+    if ( ix < MAX_STATS ) {
+        probes_stats[ ix ] += 1;
+        cout << ix << ": " << probes_stats[ix] << endl;
+    }
+    if ( ix >= size || table[ hx ].key == NULL ) {
+        return false;
+    }
+    pred = table[ hx ].data;
+    return true;
 }
 
 // You may assume that no duplicate PuzzleState is ever added.
 void LinearHashDict::add(PuzzleState *key, PuzzleState *pred) {
-    double n= number;
+    double n= number+1;
     double s = size;
     double loadfactor =n/s;
     //std::cout << "load" << loadfactor<< "\n";
-    if(loadfactor>0.5)
+    if(loadfactor>=0.5)
         rehash();
 
   // TODO:  Your code goes here...
