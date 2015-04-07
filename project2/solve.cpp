@@ -150,7 +150,11 @@ int main ()
   // dictionary implementation.
   // I've provided you an optimized version of LinkedListDict from Project 1.
   //LinkedListDict seenStates; //
+<<<<<<< HEAD
   AVLDict seenStates;
+=======
+   AVLDict seenStates;
+>>>>>>> master
     //LinearHashDict seenStates;
    // DoubleHashDict seenStates;
 
